@@ -28,7 +28,7 @@ class UranusRingRenderer {
 
     private static final ResourceLocation RING_TEXTURE = new ResourceLocation("planetring", "textures/environment/uranus_ring.png");
     private static final float RING_SIZE = 75.0f; //环的大小
-    private static final float RING_Y_OFFSET = 100.0f; // 环的高度
+    private static final float RING_Y_OFFSET = 125.0f; // 环的高度
     private static final float FOLLOW_Y_THRESHOLD = 50.0f; //在多少格跟着玩家移动
     private static final float FOLLOW_Y_OFFSET = 25.0f; //偏移高度
     //防止我忘了 环的高度+偏移高度=在多少格跟着玩家移动 这样可以做出不突兀的感觉 我能想出来这个我真是个天才 嘿嘿

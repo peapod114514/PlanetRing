@@ -8,7 +8,7 @@
   "updateUrl": "Added Ring For Saturn And Uranus",
   "authorList": ["___PEAPOD___"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "icon.png",
   "screenshots": [],
   "dependencies": ["extraplanets", "galacticraftcore"]
 }]
