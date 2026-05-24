@@ -1,6 +1,8 @@
 ![ ](https://img.shields.io/badge/Minecraft-1.12.2-green.svg) ![ ](https://img.shields.io/badge/license-Apache-red.svg) ![ ](https://img.shields.io/badge/Forge-14.23.5.2864-black.svg)  ![ ](https://img.shields.io/badge/github-OpenSource-blue?logo=github)
 # WARNING
-This Mod Need [GalactiCraft](https://modrinth.com/mod/galacticraft-legacy) And [ExtraPlanets](https://www.curseforge.com/minecraft/mc-mods/extraplanets) To Work
+This Mod Need This Mod To Work
+GalactiCraft [CurseForge](https://www.curseforge.com/minecraft/mc-mods/galacticraft-legacy) [Modrinth](https://modrinth.com/mod/galacticraft-legacy)
+ExtraPlanets [CurseForge](https://www.curseforge.com/minecraft/mc-mods/extraplanets)
 
 # Introduction
 This Mod Added Beautiful Ring For Saturn And Uranus (And The Corresponding Space Station)
