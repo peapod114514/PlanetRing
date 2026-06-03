@@ -1,11 +1,11 @@
 //Copyright 2026 ___PEAPOD___
-
+//
 //        Licensed under the Apache License, Version 2.0 (the "License");
 //        you may not use this file except in compliance with the License.
 //        You may obtain a copy of the License at
-
+//
 //        http://www.apache.org/licenses/LICENSE-2.0
-
+//
 //        Unless required by applicable law or agreed to in writing, software
 //        distributed under the License is distributed on an "AS IS" BASIS,
 //        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,7 +37,9 @@ class UranusStationRingRenderer {
     public void renderWorldLast(RenderWorldLastEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
 
-        if (mc.player == null || mc.player.world.provider.getDimension() != 4) return;
+        if (!PlanetRingConfig.enableUranusStationRing) return;
+
+        if (mc.player == null || mc.player.world.provider.getDimension() != PlanetRingConfig.uranusStationDimensionId) return;
 
         mc.getTextureManager().bindTexture(RING_TEXTURE);
 
@@ -60,18 +62,20 @@ class UranusStationRingRenderer {
         }
 
         GlStateManager.translate(0.0D, -playerY + targetYOffset, 0.0D);
-        GlStateManager.rotate(0.0f, 1.0f, 0.0f, 0.0f);
-        GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
-        GlStateManager.rotate(0.0f, 0.0f, 0.0f, 1.0f);
+
+        //环的旋转角度
+        GlStateManager.rotate(0.0f, 1.0f, 0.0f, 0.0f); //X
+        GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f); //Y
+        GlStateManager.rotate(0.0f, 0.0f, 0.0f, 1.0f); //Z
 
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
         buffer.pos(-RING_SIZE, 0.0D, -RING_SIZE).tex(0.0D, 0.0D).endVertex();
-        buffer.pos(RING_SIZE, 0.0D, -RING_SIZE).tex(1.0D, 0.0D).endVertex();
-        buffer.pos(RING_SIZE, 0.0D, RING_SIZE).tex(1.0D, 1.0D).endVertex();
-        buffer.pos(-RING_SIZE, 0.0D, RING_SIZE).tex(0.0D, 1.0D).endVertex();
+        buffer.pos( RING_SIZE, 0.0D, -RING_SIZE).tex(1.0D, 0.0D).endVertex();
+        buffer.pos( RING_SIZE, 0.0D,  RING_SIZE).tex(1.0D, 1.0D).endVertex();
+        buffer.pos(-RING_SIZE, 0.0D,  RING_SIZE).tex(0.0D, 1.0D).endVertex();
 
         tessellator.draw();
 

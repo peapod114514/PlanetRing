@@ -1,4 +1,4 @@
-buildscript {
+ buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
         mavenCentral()
@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
+version = '1.1.0'
 group = 'com.planetring.planetringmod'
 archivesBaseName = 'PlanetRing-For1.12.2'
 

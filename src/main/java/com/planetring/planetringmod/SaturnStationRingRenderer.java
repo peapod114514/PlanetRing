@@ -1,11 +1,11 @@
 //Copyright 2026 ___PEAPOD___
-
+//
 //        Licensed under the Apache License, Version 2.0 (the "License");
 //        you may not use this file except in compliance with the License.
 //        You may obtain a copy of the License at
-
+//
 //        http://www.apache.org/licenses/LICENSE-2.0
-
+//
 //        Unless required by applicable law or agreed to in writing, software
 //        distributed under the License is distributed on an "AS IS" BASIS,
 //        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,7 +37,9 @@ class SaturnStationRingRenderer {
     public void renderWorldLast(RenderWorldLastEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
 
-        if (mc.player == null || mc.player.world.provider.getDimension() != 2) return;
+        if (!PlanetRingConfig.enableSaturnStationRing) return;
+
+        if (mc.player == null || mc.player.world.provider.getDimension() != PlanetRingConfig.saturnStationDimensionId) return;
 
         mc.getTextureManager().bindTexture(RING_TEXTURE);
 
@@ -61,9 +63,10 @@ class SaturnStationRingRenderer {
 
         GlStateManager.translate(0.0D, -playerY + targetYOffset, 0.0D);
 
-        GlStateManager.rotate(0.0f, 1.0f, 0.0f, 0.0f);
-        GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
-        GlStateManager.rotate(0.0f, 0.0f, 0.0f, 1.0f);
+        //环的旋转角度
+        GlStateManager.rotate(0.0f, 1.0f, 0.0f, 0.0f); //X
+        GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f); //Y
+        GlStateManager.rotate(0.0f, 0.0f, 0.0f, 1.0f); //Z
 
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();

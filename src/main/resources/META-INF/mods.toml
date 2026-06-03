@@ -5,12 +5,12 @@
 modLoader="javafml"
 loaderVersion="[0,)"
 license="Apache"
-#issueTrackerURL="https://github.com/MyOrganization/MyMod/" #optional
-#clientSideOnly=true #optional, default=false
+issueTrackerURL="https://github.com/peapod114514/PlanetRing/issues"
+clientSideOnly=true
 
 [[mods]]
 modId="planetring"
-version="1.0.0"
+version="1.1.0"
 displayName="PlanetRing"
 #updateJSONURL="https://example.com/updates.json" #optional
 #displayURL="https://example.com/" #optional

@@ -1,11 +1,11 @@
 //Copyright 2026 ___PEAPOD___
-
+//
 //        Licensed under the Apache License, Version 2.0 (the "License");
 //        you may not use this file except in compliance with the License.
 //        You may obtain a copy of the License at
-
+//
 //        http://www.apache.org/licenses/LICENSE-2.0
-
+//
 //        Unless required by applicable law or agreed to in writing, software
 //        distributed under the License is distributed on an "AS IS" BASIS,
 //        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,14 +30,16 @@ class UranusRingRenderer {
     private static final float RING_SIZE = 75.0f; //环的大小
     private static final float RING_Y_OFFSET = 125.0f; // 环的高度
     private static final float FOLLOW_Y_THRESHOLD = 50.0f; //在多少格跟着玩家移动
-    private static final float FOLLOW_Y_OFFSET = 25.0f; //偏移高度
+    private static final float FOLLOW_Y_OFFSET = 75.0f; //偏移高度
     //防止我忘了 环的高度+偏移高度=在多少格跟着玩家移动 这样可以做出不突兀的感觉 我能想出来这个我真是个天才 嘿嘿
 
     @SubscribeEvent
     public void renderWorldLast(RenderWorldLastEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
 
-        if (mc.player == null || mc.player.world.provider.getDimension() != -17) return;
+        if (!PlanetRingConfig.enableUranusRing) return;
+
+        if (mc.player == null || mc.player.world.provider.getDimension() != PlanetRingConfig.uranusDimensionId) return;
 
         mc.getTextureManager().bindTexture(RING_TEXTURE);
 
@@ -60,18 +62,20 @@ class UranusRingRenderer {
         }
 
         GlStateManager.translate(0.0D, -playerY + targetYOffset, 0.0D);
-        GlStateManager.rotate(97.77f, 1.0f, 0.0f, 0.0f);
-        GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
-        GlStateManager.rotate(45.0f, 0.0f, 0.0f, 1.0f);
+
+        //环的旋转角度
+        GlStateManager.rotate(97.77f, 1.0f, 0.0f, 0.0f); //X
+        GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f); //Y
+        GlStateManager.rotate(45.0f, 0.0f, 0.0f, 1.0f); //Z
 
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
         buffer.pos(-RING_SIZE, 0.0D, -RING_SIZE).tex(0.0D, 0.0D).endVertex();
-        buffer.pos(RING_SIZE, 0.0D, -RING_SIZE).tex(1.0D, 0.0D).endVertex();
-        buffer.pos(RING_SIZE, 0.0D, RING_SIZE).tex(1.0D, 1.0D).endVertex();
-        buffer.pos(-RING_SIZE, 0.0D, RING_SIZE).tex(0.0D, 1.0D).endVertex();
+        buffer.pos( RING_SIZE, 0.0D, -RING_SIZE).tex(1.0D, 0.0D).endVertex();
+        buffer.pos( RING_SIZE, 0.0D,  RING_SIZE).tex(1.0D, 1.0D).endVertex();
+        buffer.pos(-RING_SIZE, 0.0D,  RING_SIZE).tex(0.0D, 1.0D).endVertex();
 
         tessellator.draw();
 

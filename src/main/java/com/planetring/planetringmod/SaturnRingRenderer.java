@@ -1,11 +1,11 @@
 //Copyright 2026 ___PEAPOD___
-
+//
 //        Licensed under the Apache License, Version 2.0 (the "License");
 //        you may not use this file except in compliance with the License.
 //        You may obtain a copy of the License at
-
+//
 //        http://www.apache.org/licenses/LICENSE-2.0
-
+//
 //        Unless required by applicable law or agreed to in writing, software
 //        distributed under the License is distributed on an "AS IS" BASIS,
 //        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,16 +28,18 @@ class SaturnRingRenderer {
 
     private static final ResourceLocation RING_TEXTURE = new ResourceLocation("planetring", "textures/environment/saturn_ring.png");
     private static final float RING_SIZE = 150.0f; //环的大小
-    private static final float RING_Y_OFFSET = 55.0f; // 环的高度
+    private static final float RING_Y_OFFSET = 60.0f; // 环的高度
     private static final float FOLLOW_Y_THRESHOLD = 100.0f; //在多少格跟着玩家移动
-    private static final float FOLLOW_Y_OFFSET = 45.0f; //偏移高度
+    private static final float FOLLOW_Y_OFFSET = 40.0f; //偏移高度
     //防止我忘了 环的高度+偏移高度=在多少格跟着玩家移动 这样可以做出不突兀的感觉 我能想出来这个我真是个天才 嘿嘿
 
     @SubscribeEvent
     public void renderWorldLast(RenderWorldLastEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
 
-        if (mc.player == null || mc.player.world.provider.getDimension() != -16) return;
+        if (!PlanetRingConfig.enableSaturnRing) return;
+
+        if (mc.player == null || mc.player.world.provider.getDimension() != PlanetRingConfig.saturnDimensionId) return;
 
         mc.getTextureManager().bindTexture(RING_TEXTURE);
 
@@ -61,9 +63,10 @@ class SaturnRingRenderer {
 
         GlStateManager.translate(0.0D, -playerY + targetYOffset, 0.0D);
 
-        GlStateManager.rotate(26.73f, 1.0f, 0.0f, 0.0f);
-        GlStateManager.rotate(5.0f, 0.0f, 1.0f, 0.0f);
-        GlStateManager.rotate(10.0f, 0.0f, 0.0f, 1.0f);
+        //环的旋转角度
+        GlStateManager.rotate(26.73f, 1.0f, 0.0f, 0.0f); //X
+        GlStateManager.rotate(5.0f, 0.0f, 1.0f, 0.0f); //Y
+        GlStateManager.rotate(10.0f, 0.0f, 0.0f, 1.0f); //Z
 
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
